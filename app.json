@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "presencaAula",
-    "slug": "presencaAula",
+    "slug": "presencaaula",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -40,6 +40,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "497ae6ea-ca42-4452-ad25-fef187880998"
+      }
+    },
+    "owner": "apolosantoni"
   }
 }
