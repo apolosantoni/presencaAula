@@ -14,7 +14,7 @@ import { useSQLiteContext } from "expo-sqlite";
 
 type UserType = { id: number; name: string; email: string };
 
-export default function Agenda() {
+export default function Index() {
   const [data, setData] = useState<UserType[]>([]);
   const database = useSQLiteContext();
 
@@ -50,7 +50,7 @@ export default function Agenda() {
   const headerRight = () => {
     return (
       <TouchableOpacity
-        onPress={() => router.push("/modal1")}
+        onPress={() => router.push("/modal")}
         style={{ marginRight: 10 }}
       >
         <FontAwesome name="plus-circle" size={28} color="blue" />

@@ -7,6 +7,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
+          headerShown: false,
           title: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="house" color={color} />
@@ -16,9 +17,20 @@ export default function TabLayout() {
       <Tabs.Screen
         name="agenda"
         options={{
-          title: "Agenda",
+          headerTitle: "",
+          title: "Chamada",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="calendar-month" color={color} />
+            <MaterialIcons size={28} name="fact-check" color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="alunos"
+        options={{
+          headerTitle: "",
+          title: "Relatorios",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons size={28} name="print" color={color} />
           ),
         }}
       />
