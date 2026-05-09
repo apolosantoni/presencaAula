@@ -15,26 +15,6 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="agenda"
-        options={{
-          headerTitle: "",
-          title: "Chamada",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="fact-check" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="alunos"
-        options={{
-          headerTitle: "",
-          title: "Relatorios",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="print" color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
         name="perfil"
         options={{
           title: "Perfil",
