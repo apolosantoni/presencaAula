@@ -69,7 +69,7 @@ export default function Perfil() {
               alignItems: "center",
               alignContent: "flex-end",
             }}
-            onPress={() => router.push("/outros/colegio")}
+            onPress={() => router.push("/outros/disciplina")}
           >
             <Text>Cadastrar disciplinas</Text>
             <MaterialIcons size={28} name="save" color={"blue"} />
@@ -84,7 +84,7 @@ export default function Perfil() {
               alignItems: "center",
               alignContent: "flex-end",
             }}
-            onPress={() => router.push("/outros/colegio")}
+            onPress={() => router.push("/outros/aluno")}
           >
             <Text>Cadastrar Alunos</Text>
             <MaterialIcons size={28} name="save" color={"blue"} />
