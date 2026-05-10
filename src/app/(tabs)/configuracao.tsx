@@ -10,8 +10,10 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
+import { RecriandoBancoDados } from "../outros/auxiliares/database";
+import { SQLiteDatabase, SQLiteProvider, SQLiteStatement } from "expo-sqlite";
 
-export default function Perfil() {
+export default function Configuracao() {
   const router = useRouter();
 
   return (
@@ -88,6 +90,24 @@ export default function Perfil() {
           >
             <Text>Cadastrar Alunos</Text>
             <MaterialIcons size={28} name="save" color={"blue"} />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.splitView}>
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              flexDirection: "row",
+              alignItems: "center",
+              alignContent: "flex-end",
+            }}
+            onPress={() => {
+              RecriandoBancoDados;
+            }}
+          >
+            <Text>Recriar Banco Dados</Text>
+            <MaterialIcons size={28} name="warning" color={"red"} />
           </TouchableOpacity>
         </View>
       </View>

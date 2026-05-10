@@ -5,8 +5,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useSQLiteContext } from "expo-sqlite";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Checkbox from "expo-checkbox";
-import { Picker } from "@react-native-picker/picker";
 import {
   Text,
   View,
@@ -16,7 +14,6 @@ import {
   FlatList,
   Alert,
 } from "react-native";
-import ExpoCheckbox from "expo-checkbox/build/ExpoCheckbox";
 
 type UserType = {
   id: number;
@@ -26,17 +23,10 @@ type UserType = {
   telefone: string;
 };
 
-type DisciplinaType = {
-  id: number;
-  name: string;
-};
-
-export default function Aluno() {
+export default function Colegio() {
   const router = useRouter();
   const database = useSQLiteContext();
   const [data, setData] = useState<UserType[]>([]);
-  const [dataDisciplina, setDataDisciplina] = useState<DisciplinaType[]>([]);
-  const [disciplina, setDisciplina] = useState<string>("");
 
   const [id, setId] = useState<number | null>(null);
   const [name, setName] = useState<string>("");
@@ -45,18 +35,12 @@ export default function Aluno() {
   const [telefone, setTelefone] = useState<string>("");
 
   const [bloqueado, setBloqueado] = useState<boolean>(false);
-  const [manterDados, setManterDados] = useState<boolean>(false);
 
   const loadData = async () => {
     const result = await database.getAllAsync<UserType>(
       "SELECT * FROM colegio;",
     );
     setData(result);
-
-    const result1 = await database.getAllAsync<DisciplinaType>(
-      "SELECT * FROM disciplina;",
-    );
-    setDataDisciplina(result1);
   };
 
   const handelSave = async () => {
@@ -140,8 +124,10 @@ export default function Aluno() {
     <SafeAreaView style={styles.container}>
       <Stack.Screen options={{ headerShown: true, title: "" }} />
       <View style={styles.header}>
-        <Text style={styles.titleText}>Alunos</Text>
-        <Text style={styles.subtitleText}>Cadastro os alunos das turmas.</Text>
+        <Text style={styles.titleText}>Colegios</Text>
+        <Text style={styles.subtitleText}>
+          Cadastro os colegios em que leciona.
+        </Text>
       </View>
       <View style={styles.line} />
       <View style={styles.containerDiv}>
@@ -156,66 +142,23 @@ export default function Aluno() {
               value={name}
               onChangeText={(text) => setName(text)}
             />
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <TextInput
-                editable={!bloqueado}
-                keyboardType="numeric"
-                maxLength={4}
-                style={[styles.textInput, { width: 50 }]}
-                placeholder="Ano"
-                value={responsavel}
-                onChangeText={(text) => setResponsavel(text)}
-              />
-              <TextInput
-                editable={!bloqueado}
-                keyboardType="numeric"
-                maxLength={4}
-                style={[styles.textInput, { width: 50 }]}
-                placeholder="Serie"
-                value={responsavel}
-                onChangeText={(text) => setResponsavel(text)}
-              />
-              <TextInput
-                editable={!bloqueado}
-                keyboardType="default"
-                maxLength={4}
-                style={[styles.textInput, { width: 50 }]}
-                placeholder="Turma"
-                value={email}
-                onChangeText={(text) => setEmail(text)}
-              />
-              <View
-                style={{ flexDirection: "row", alignItems: "center", gap: 20 }}
-              >
-                <Text style={{ fontSize: 10 }}>Manter Dados</Text>
-                <Checkbox value={manterDados} onValueChange={setManterDados} />
-              </View>
-            </View>
-            <Picker
-              selectedValue={disciplina}
-              onValueChange={(itemValue: string, itemIndex: number) =>
-                setDisciplina(itemValue)
-              }
-              enabled={!manterDados}
-            >
-              {dataDisciplina.map((item) => (
-                <Picker.Item label={item.name} value={item.id} key={item.id} />
-              ))}
-            </Picker>
             <TextInput
               editable={!bloqueado}
               keyboardType="default"
-              maxLength={12}
-              style={[styles.textInput]}
-              placeholder="Nome Aluno"
-              value={telefone}
-              onChangeText={(text) => setTelefone(text)}
+              maxLength={255}
+              style={styles.textInput}
+              placeholder="Responsavel"
+              value={responsavel}
+              onChangeText={(text) => setResponsavel(text)}
+            />
+            <TextInput
+              editable={!bloqueado}
+              keyboardType="email-address"
+              maxLength={255}
+              style={styles.textInput}
+              placeholder="Email"
+              value={email}
+              onChangeText={(text) => setEmail(text)}
             />
             <View
               style={{
@@ -226,10 +169,10 @@ export default function Aluno() {
             >
               <TextInput
                 editable={!bloqueado}
-                keyboardType="default"
-                maxLength={255}
+                keyboardType="number-pad"
+                maxLength={12}
                 style={[styles.textInput, { width: 200 }]}
-                placeholder="Registro Matricula"
+                placeholder="Telefone"
                 value={telefone}
                 onChangeText={(text) => setTelefone(text)}
               />
@@ -283,7 +226,9 @@ export default function Aluno() {
                       setTelefone(item.telefone);
                     }}
                   >
-                    <Text>{item.name}</Text>
+                    <Text>
+                      {item.id} - {item.name}
+                    </Text>
                     <Text>{item.responsavel}</Text>
                     <Text>{item.email}</Text>
                     <Text>{item.telefone}</Text>

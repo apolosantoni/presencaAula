@@ -5,6 +5,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { useSQLiteContext } from "expo-sqlite";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Picker } from "@react-native-picker/picker";
 import {
   Text,
   View,
@@ -15,7 +16,12 @@ import {
   Alert,
 } from "react-native";
 
-type UserType = {
+type DisciplinaType = {
+  id: number;
+  name: string;
+  colegioId: number;
+};
+type ColegioType = {
   id: number;
   name: string;
   responsavel: string;
@@ -23,24 +29,34 @@ type UserType = {
   telefone: string;
 };
 
-export default function Colegio() {
+export default function Disciplina() {
   const router = useRouter();
+
   const database = useSQLiteContext();
-  const [data, setData] = useState<UserType[]>([]);
+  const colegioDB = useSQLiteContext();
+
+  const [data, setData] = useState<DisciplinaType[]>([]);
+  const [dataColegio, setDataColegio] = useState<ColegioType[]>([]);
 
   const [id, setId] = useState<number | null>(null);
   const [name, setName] = useState<string>("");
-  const [responsavel, setResponsavel] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [telefone, setTelefone] = useState<string>("");
+
+  const [idColegio, setIdColegio] = useState<number | null>(null);
+  const [nameColegio, setNameColegio] = useState<string>("");
 
   const [bloqueado, setBloqueado] = useState<boolean>(false);
+  const [filteredData, setFilteredData] = useState(data);
 
   const loadData = async () => {
-    const result = await database.getAllAsync<UserType>(
-      "SELECT * FROM colegio;",
+    const result = await database.getAllAsync<DisciplinaType>(
+      "SELECT * FROM disciplina;",
     );
     setData(result);
+
+    const result1 = await database.getAllAsync<ColegioType>(
+      "SELECT * FROM colegio;",
+    );
+    setDataColegio(result1);
   };
 
   const handelSave = async () => {
@@ -50,11 +66,9 @@ export default function Colegio() {
           await database.runAsync(
             `UPDATE colegio SET
               name = ?,
-              responsavel = ?,
-              email = ?,
-              telefone = ?
+              colegioId = ?
              WHERE id = ?`,
-            [name, responsavel, email, telefone, id],
+            [name, idColegio, id],
           );
           loadData();
         } catch (error) {
@@ -62,8 +76,8 @@ export default function Colegio() {
         }
       } else {
         database.runAsync(
-          "INSERT INTO colegio (name, responsavel, email, telefone) VALUES (?,?,?,?);",
-          [name, responsavel, email, telefone],
+          "INSERT INTO disciplina (name, colegioId ) VALUES (?,?);",
+          [name, idColegio],
         );
       }
     } catch (error) {
@@ -78,15 +92,17 @@ export default function Colegio() {
   const cancela = () => {
     setId(null);
     setName("");
-    setResponsavel("");
-    setEmail("");
-    setTelefone("");
     setBloqueado(true);
+  };
+
+  const novo = () => {
+    setName("");
+    setBloqueado(false);
   };
 
   const handleDelete = async (id: number) => {
     try {
-      await database.runAsync("DELETE FROM colegio WHERE id = ?", [id]);
+      await database.runAsync("DELETE FROM disciplina WHERE id = ?", [id]);
 
       loadData();
     } catch (error) {
@@ -118,48 +134,86 @@ export default function Colegio() {
 
   useEffect(() => {
     setBloqueado(!id);
-  }, [id]);
+    setFilteredData(data.filter((item) => item.colegioId === idColegio));
+  }, [id, idColegio]);
 
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen options={{ headerShown: true, title: "" }} />
       <View style={styles.header}>
-        <Text style={styles.titleText}>Colegios</Text>
+        <Text style={styles.titleText}>Disciplinas</Text>
         <Text style={styles.subtitleText}>
-          Cadastro os colegios em que leciona.
+          Aqui voce cadastra as disciplinas que leciona.
         </Text>
       </View>
       <View style={styles.line} />
       <View style={styles.containerDiv}>
         <View style={styles.containerDiv}>
           <View>
-            <TextInput
+            {/* <TextInput
               editable={!bloqueado}
               keyboardType="default"
               maxLength={255}
               style={styles.textInput}
-              placeholder="Nome Colegio"
-              value={name}
-              onChangeText={(text) => setName(text)}
-            />
-            <TextInput
-              editable={!bloqueado}
-              keyboardType="default"
-              maxLength={255}
-              style={styles.textInput}
-              placeholder="Responsavel"
-              value={responsavel}
-              onChangeText={(text) => setResponsavel(text)}
-            />
-            <TextInput
-              editable={!bloqueado}
-              keyboardType="email-address"
-              maxLength={255}
-              style={styles.textInput}
-              placeholder="Email"
-              value={email}
-              onChangeText={(text) => setEmail(text)}
-            />
+              placeholder="Colegio"
+              value={nameColegio}
+              onChangeText={(text) => setNameColegio(text)}
+            /> */}
+            <View
+              style={{
+                flexDirection: "column",
+                marginBottom: 10,
+              }}
+            >
+              <Text
+                style={{
+                  width: 65,
+                  bottom: 0,
+
+                  fontSize: 12,
+                  borderWidth: 1,
+                  paddingHorizontal: 5,
+                }}
+              >
+                Colégios
+              </Text>
+              <View style={{ flex: 1 }}>
+                <Picker
+                  style={{ backgroundColor: "#dfdfdf" }}
+                  selectedValue={idColegio?.toString()}
+                  onValueChange={(itemValue: string) => {
+                    setIdColegio(parseInt(itemValue));
+                    //console.log("id colegio :" + idColegio?.toString());
+                  }}
+                >
+                  {dataColegio.map((item) => (
+                    <Picker.Item label={item.name} value={item.id} />
+                  ))}
+                </Picker>
+              </View>
+            </View>
+            <View>
+              <Text
+                style={{
+                  width: 100,
+                  bottom: 0,
+                  fontSize: 12,
+                  borderWidth: 1,
+                  paddingHorizontal: 5,
+                }}
+              >
+                Nome disciplina
+              </Text>
+              <TextInput
+                editable={!bloqueado}
+                keyboardType="default"
+                maxLength={255}
+                style={styles.textInput}
+                placeholder="Disciplina"
+                value={name}
+                onChangeText={(text) => setName(text)}
+              />
+            </View>
             <View
               style={{
                 flexDirection: "row",
@@ -167,15 +221,7 @@ export default function Colegio() {
                 justifyContent: "space-between",
               }}
             >
-              <TextInput
-                editable={!bloqueado}
-                keyboardType="number-pad"
-                maxLength={12}
-                style={[styles.textInput, { width: 200 }]}
-                placeholder="Telefone"
-                value={telefone}
-                onChangeText={(text) => setTelefone(text)}
-              />
+              <View style={[styles.textInput, { width: 200 }]} />
               <TouchableOpacity
                 disabled={bloqueado}
                 onPress={() => handelSave()}
@@ -189,7 +235,7 @@ export default function Colegio() {
               <TouchableOpacity onPress={cancela}>
                 <MaterialIcons size={32} name="cancel" color={"gray"} />
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setBloqueado(false)}>
+              <TouchableOpacity onPress={novo}>
                 <MaterialIcons size={32} name="add-circle" color={"blue"} />
               </TouchableOpacity>
             </View>
@@ -206,7 +252,8 @@ export default function Colegio() {
               maxHeight: 300,
             }}
             showsVerticalScrollIndicator
-            data={data}
+            data={filteredData}
+            ListEmptyComponent={<Text style={{}}>No results found</Text>}
             renderItem={({ item }) => {
               return (
                 <View
@@ -221,15 +268,9 @@ export default function Colegio() {
                     onPress={() => {
                       setId(item.id);
                       setName(item.name);
-                      setResponsavel(item.responsavel);
-                      setEmail(item.email);
-                      setTelefone(item.telefone);
                     }}
                   >
                     <Text>{item.name}</Text>
-                    <Text>{item.responsavel}</Text>
-                    <Text>{item.email}</Text>
-                    <Text>{item.telefone}</Text>
                   </TouchableOpacity>
                   <View style={{ flexDirection: "row", gap: 10 }}>
                     <TouchableOpacity onPress={() => handleDelete(item.id)}>
