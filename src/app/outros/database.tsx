@@ -1,12 +1,10 @@
-import * as SQLite from "expo-sqlite";
-import { Alert } from "react-native";
+import { SQLiteDatabase } from "expo-sqlite";
 
 const database_name = "presencaAula.db";
-export default function databases() {
+export default function Database() {
   return null;
 }
-
-export async function CriandoBancoDados(db: SQLite.SQLiteDatabase) {
+export async function CriandoBancoDados(db: SQLiteDatabase) {
   await db.execAsync(` 
             CREATE TABLE IF NOT EXISTS perfil (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -43,7 +41,7 @@ export async function CriandoBancoDados(db: SQLite.SQLiteDatabase) {
 
   console.log("Criando Banco de dados");
 }
-export async function RecriandoBancoDados(db: SQLite.SQLiteDatabase) {
+export async function RecriandoBancoDados(db: SQLiteDatabase) {
   await db.execAsync(` 
             DROP TABLE IF EXISTS perfil;
             CREATE TABLE IF NOT EXISTS perfil (

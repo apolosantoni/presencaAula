@@ -1,6 +1,6 @@
 import { Stack } from "expo-router/stack";
 import { SQLiteDatabase, SQLiteProvider } from "expo-sqlite";
-import { CriandoBancoDados } from "../app/outros/auxiliares/database";
+import { CriandoBancoDados } from "./outros/database";
 
 export default function Layout() {
   const createDbIfNeeded = async (db: SQLiteDatabase) => {
@@ -52,7 +52,6 @@ export default function Layout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="outros" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-        <Stack.Screen name="modal1" options={{ presentation: "modal" }} />
       </Stack>
     </SQLiteProvider>
   );
