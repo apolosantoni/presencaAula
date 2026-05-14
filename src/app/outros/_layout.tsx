@@ -13,7 +13,7 @@ export default function Layout() {
       />
       <Stack.Screen
         name="turma"
-        options={{ headerShown: true, title: "Turma" }}
+        options={{ headerShown: true, title: "Aula" }}
       />
       <Stack.Screen
         name="complementares"

@@ -100,8 +100,23 @@ export const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#FFF",
   },
+  inputs: {
+    //width: "100%",
+    borderWidth: 1,
+    borderColor: "#CCC",
+    borderRadius: 6,
+    padding: 10,
+    backgroundColor: "#FFF",
+  },
   picker: {
     width: "100%",
+    borderWidth: 1,
+    borderColor: "#CCC",
+    borderRadius: 6,
+    backgroundColor: "#FFF",
+  },
+  pickers: {
+    //width: "30%",
     borderWidth: 1,
     borderColor: "#CCC",
     borderRadius: 6,
@@ -112,6 +127,7 @@ export const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 6,
     alignItems: "center",
+    justifyContent: "center",
     marginBottom: 16,
   },
   addButtonIcon: {
@@ -136,14 +152,15 @@ export const styles = StyleSheet.create({
   listItem: {
     flexDirection: "row",
     alignItems: "center",
+    alignContent: "center",
     justifyContent: "space-between",
     backgroundColor: "#FFF",
-    padding: 10,
+    padding: 5,
     borderRadius: 6,
-    marginBottom: 8,
     borderWidth: 1,
     borderColor: "#DDD",
-    gap: 10,
+    //marginBottom: 8,
+    //gap: 10,
   },
   listItemTittle: { fontWeight: "bold", fontSize: 20 },
   listItemName: { fontWeight: "bold", fontSize: 16 },
@@ -188,13 +205,14 @@ export const styles = StyleSheet.create({
     borderRadius: 6,
     borderColor: "#CCC",
     paddingVertical: 5,
+    gap: 5,
   },
   listItemText: {
     fontSize: 16,
     color: "#333",
   },
   divider: {
-    width: "100%", // Espessura da linha
+    //width: "100%", // Espessura da linha
     height: 1, // Altura total do container
     backgroundColor: "#ccc", // Cor da linha
     marginHorizontal: 10,

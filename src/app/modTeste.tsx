@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function Modal() {
+export default function ModTeste() {
   const { id } = useLocalSearchParams();
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -71,114 +71,7 @@ export default function Modal() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.tittle}>
-        <Text style={styles.tittleText}>Cadastrando usuarios</Text>
-      </View>
-      <View>
-        <TextInput
-          placeholder="Name"
-          value={name}
-          onChangeText={(text) => setName(text)}
-          style={styles.textInput}
-        />
-        <TextInput
-          placeholder="E-mail"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={styles.textInput}
-        />
-      </View>
-
-      <View
-        style={{
-          flex: 1,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          marginTop: 50,
-          gap: 20,
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => router.back()}
-          style={[styles.button, { backgroundColor: "red" }]}
-        >
-          <Text style={styles.buttonText}>Cancel</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={async () => {
-            editMode ? handleUpdate() : handelSave();
-          }}
-          style={[styles.button, { backgroundColor: "red" }]}
-        >
-          <Text style={styles.buttonText}>
-            {editMode ? "Atualizar" : "Salvar"}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
-  );
-}
-export function Modal1() {
-  const { id } = useLocalSearchParams();
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-
-  const [editMode, setEditMode] = useState(false);
-
-  const database = useSQLiteContext();
-
-  useEffect(() => {
-    if (id) {
-      setEditMode(true);
-      loadData();
-    }
-  }, [id]);
-
-  const loadData = async () => {
-    const result = await database.getFirstAsync<{
-      name: string;
-      email: string;
-    }>("SELECT name, email FROM users WHERE id = ?;", [parseInt(id as string)]);
-    if (result) {
-      setName(result.name);
-      setEmail(result.email);
-    }
-  };
-
-  const handelSave = async () => {
-    try {
-      database.runAsync("INSERT INTO users (name, email) VALUES (?,?);", [
-        name,
-        email,
-      ]);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setName("");
-      setEmail("");
-    }
-    router.back();
-  };
-
-  const handleUpdate = async () => {
-    try {
-      const response = await database.runAsync(
-        `UPDATE users SET name = ?, email = ? WHERE id = ?`,
-        [name, email, parseInt(id as string)],
-      );
-      console.log("Item atualizado com sucesso", response?.changes!);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setName("");
-      setEmail("");
-    }
-    router.back();
-  };
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.tittle}>
-        <Text style={styles.tittleText}>Chamando Modal1</Text>
+        <Text style={styles.tittleText}>Modal Teste</Text>
       </View>
       <View>
         <TextInput

@@ -52,6 +52,7 @@ export default function Layout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="outros" options={{ headerShown: false }} />
         <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        <Stack.Screen name="modTeste" options={{ presentation: "modal" }} />
       </Stack>
     </SQLiteProvider>
   );
