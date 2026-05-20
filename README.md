@@ -5,6 +5,7 @@ Registrar a frequencia dos alunos e emitir relatorios de presença a um responsa
 ## Índicie
 
 - [Descrição](#descrição)
+- [Entendimento e Estrutura](#Entendimento-e-Estrutura)
 - [Status do Projeto](#status-do-projeto)
 - [Funcionalidades](#funcionalidades)
 - [Tecnologias Utilizadas](#tecnologias-utilizadas)
@@ -31,6 +32,27 @@ A disciplina( materia aplicada ) refere a uma turma e seus alunos cadastrados.
 
 \*\* com isso o sistema tem que percorrer os registros e aferir as datas de aula da disciplina, e conforme configurado emitir o relatorio.
 
+## Entendimento e Estrutura
+
+### O que é Aula.
+
+A aula é a aplicação de uma disciplina ministrada para alunos agrupados em turmas que pertence a uma determinada serie/ano de um determinado tipo de ensino que pertence a um periodo em um colegio.
+
+### O que é presença.
+
+É a verificação do comparecimento do aluno em uma disciplina.
+
+### Qual a frequencia dos registro.
+
+A disciplina é aplicada em dias da semana em horarios determinados que podem sofrer alteração por diversos fatores.
+
+### O que pode ser relatado desse registro.
+
+A frequencia do aluno nas disciplina.
+O percentual de alunos na disciplina.
+Os dias com maior e menor frequencia dos alunos.
+Quantidade de vezes em que o professor aplicou a disciplina.( considerando que o mesmo pode nao apresentar aula devido a motivos adversos, tais como fechamento de colegio, tempo, ou algum tipo de determinação.)
+
 ## Status do Projeto
 
 🚧 Projeto em construção 🚧
@@ -52,59 +74,9 @@ A disciplina( materia aplicada ) refere a uma turma e seus alunos cadastrados.
 
 1. Clone o repositório:
 
-````bash
+```bash
 git clone https://github.com/apolosantoni/presencaaula.git
 
 
 
-## Welcome to your Expo app 👋
-
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-````
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
