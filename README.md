@@ -1,4 +1,63 @@
-# Welcome to your Expo app 👋
+# Cadastro de presença em aula.
+
+Registrar a frequencia dos alunos e emitir relatorios de presença a um responsavel.
+
+## Índicie
+
+- [Descrição](#descrição)
+- [Status do Projeto](#status-do-projeto)
+- [Funcionalidades](#funcionalidades)
+- [Tecnologias Utilizadas](#tecnologias-utilizadas)
+- [Como Rodar o Projeto](#como-rodar-o-projeto)
+- [Contribuidores](#contribuidores)
+- [Licença](#licença)
+
+## Descrição
+
+Presença a frequencia do aluno deve ser emitada semanalmente ou mensalmente.
+As aulas podem ser simples ou mais. Tem uma data semanal fixa e horario fixo.
+As aulas sao para uma determinada turma que por sua vez é composta de um grupo de alunos.
+Os alunos sao entidades da escola, podendo pertencer a mais de um periodo, ensino, serie e turma
+Ex. Aluno A
+periodo matutino - ensino medio - 3º ano - turma A
+periodo vespertino - ensino técnico Informática - 1º ano - Turma B
+
+A disciplina( materia aplicada ) refere a uma turma e seus alunos cadastrados.
+
+- turma é o agrupamento dos alunos.
+- disciplina é aplicada recorrente em dia(s) da semana, em horarios fixos(com possibilidade de alteração.)
+- registrando os dias da semana e horario das aulas pode ser gerado nota ao usuario sobre a necessidade de aferir a presença do aluno.
+- com isso pode ser definido de forma automatica periodo para emissão do relatorio ao responsavel.
+
+\*\* com isso o sistema tem que percorrer os registros e aferir as datas de aula da disciplina, e conforme configurado emitir o relatorio.
+
+## Status do Projeto
+
+🚧 Projeto em construção 🚧
+
+## Funcionalidades
+
+- Funcionalidade 1: Registro de frequencia de alunos em determinadas aulas prestadas por professor.
+- Funcionalidade 2: Emissão de relatorios com base na frequencia do aluno e presença em aula.
+
+## Tecnologias Utilizadas
+
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), um sandbox limitado para desenvolvimento de Expo
+- [SQLite](https://docs.expo.dev/versions/latest/sdk/sqlite/), banco de dados nativo do aparelho
+
+## Como Rodar o Projeto
+
+1. Clone o repositório:
+
+````bash
+git clone https://github.com/apolosantoni/presencaaula.git
+
+
+
+## Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -8,7 +67,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
    ```bash
    npm install
-   ```
+````
 
 2. Start the app
 
@@ -17,11 +76,6 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ```
 
 In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
